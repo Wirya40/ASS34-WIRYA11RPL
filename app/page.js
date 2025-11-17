@@ -8,7 +8,7 @@ export default function StudentsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
 
-  // 🔹 Fetch students from API
+ 
   const fetchStudents = async () => {
     const res = await fetch("/api/students");
     const data = await res.json();
@@ -19,11 +19,11 @@ export default function StudentsPage() {
     fetchStudents();
   }, []);
 
-  // 🔹 Add or Update student
+  
   const handleOk = async () => {
     const values = await form.validateFields();
     if (values.id) {
-      // Update
+     
       await fetch(`/api/students/${values.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -31,7 +31,7 @@ export default function StudentsPage() {
       });
       message.success("Student updated!");
     } else {
-      // Add new
+     
       await fetch("/api/students", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -44,7 +44,7 @@ export default function StudentsPage() {
     fetchStudents();
   };
 
-  // 🔹 Delete student
+  
   const handleDelete = async (id) => {
     await fetch(`/api/students/${id}`, { method: "DELETE" });
     message.success("Student deleted!");
